@@ -1,0 +1,21 @@
+.items-list.applications-list h3 {
+  margin-top: 70px;
+}
+
+.items-list {
+  .create-application {
+    .controls {
+      opacity: 1 !important;
+      span.fa-times {
+        color: #e74c3c;
+      }
+      span.fa-check {
+        color: #15bb99;
+      }
+    }
+  }
+}
+
+span.fa-times {
+  color: #e74c3c;
+}

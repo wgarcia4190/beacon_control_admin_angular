@@ -1,0 +1,25 @@
+@import './_variables.scss';
+.profile-edit {
+  margin-top: 20px;
+}
+
+.beacon-os-box {
+  border-radius: 3px;
+  background-color: #fff;
+  border: 1px solid #e3e3e3;
+  border-top: 6px solid $primary_color;
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.form-field-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 40px 20px 40px;
+}
+
+.submit-section {
+  text-align: right;
+  padding-top: 10px;
+}

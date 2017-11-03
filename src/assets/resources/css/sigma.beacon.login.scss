@@ -1,0 +1,140 @@
+@import './_variables.scss';
+.admin-access-topbar {
+  background: #fff;
+  height: 110px;
+  padding: 35px 0;
+  position: relative;
+  .logo {
+    background: url('assets/resources/imgs/logo.png') no-repeat center;
+    background-size: contain;
+    display: block;
+    height: 46px;
+    width: 232px;
+    margin-top: -3px;
+    margin-left: 30px;
+  }
+}
+
+.admin-access {
+  background: #f4f4f4;
+  bottom: 0;
+  color: #4e4e4e;
+  font: 18px 'Oswald', 'Avenir', sans-serif;
+  margin: auto;
+  display: table;
+  height: 100%;
+  left: 0;
+  margin: -110px auto auto;
+  padding-top: 100px;
+  right: 0;
+  table-layout: fixed;
+  top: 0;
+  .center-vertically {
+    display: table-cell;
+    padding: 60px 0;
+    vertical-align: middle;
+    width: 420px;
+  }
+  h1,
+  h2 {
+    font-family: $font-family;
+  }
+  h1 {
+    color: #0D2041;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0 0 60px;
+    text-align: center;
+  }
+  h2 {
+    color: #4e4e4e;
+    font-size: 28px;
+    margin-bottom: 30px;
+    small {
+      color: #4e4e4e;
+      line-height: 36px;
+      font-size: 65%;
+    }
+  }
+  form {
+    border: none;
+    margin: 0 auto;
+    width: 100%;
+    input[type=text],
+    input[type=email],
+    input[type=password] {
+      background: #fff;
+      border: 2px solid $primary-color;
+      border-radius: 2px;
+      font: 20px 'Oswald', 'Avenir', sans-serif;
+      font-weight: 300;
+      height: 56px;
+      padding: 16px 20px 12px;
+      width: 100%;
+    }
+    input[type=submit] {
+      background: $primary-color;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 500;
+      height: 56px;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+      padding: 15px 0 15px 6px;
+      text-transform: uppercase;
+      width: 100%;
+      cursor: pointer;
+      font-family: $font-family;
+      &:active {
+        background: $secondary-color;
+      }
+      &:hover {
+        background: $secondary-color;
+      }
+    }
+  }
+  .checkbox {
+    margin: 20px 0 14px;
+    position: relative;
+    label {
+      cursor: pointer;
+      color: #4e4e4e;
+      display: inline;
+      padding-left: 27px;
+      margin-bottom: 0;
+      font-weight: normal;
+      min-height: 18px;
+      max-width: 100%;
+    }
+    label:before {
+      background: #fff;
+      border: 2px solid $secondary-color;
+      border-radius: 2px;
+      content: '';
+      display: inline-block;
+      height: 16px;
+      left: 0;
+      width: 16px;
+      position: absolute;
+      top: 4px;
+    }
+    input[type=checkbox] {
+      display: none;
+      position: absolute;
+      margin-left: -20px;
+    }
+  }
+}
+
+footer {
+  background: #f5f5f6;
+  border-top: 1px solid #929497;
+  font-size: 15px;
+  padding: 28px 0;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+}

@@ -1,0 +1,146 @@
+<div class="col-md-6 first-column">
+  <div class="control-group">
+    <div class="controls">
+      <div class="form-group optional">
+        <label class="optional control-label" for="beacon_protocol">Protocol</label>
+
+        <select class="select optional form-control selectpicker" data-live-search="false" id="beacon_protocol" (change)="onSelectedProtocol(ibeacon, eddystone, $event);"
+          [formControl]="validForm.controls['beaconType']">
+          <option selected="selected" value="iBeacon">iBeacon</option>
+          <option value="Eddystone">Eddystone</option>
+        </select>
+      </div>
+
+      <div #ibeacon class="control-group ibeacon-container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="controls">
+              <div class="form-group optional">
+                <label class="required beaconUUID" for="beacon_uuid">UUID</label>
+
+                <input style="text-transform:uppercase" [textMask]="{mask: beaconuuidMask}" class="beaconUUID required form-control uuid-input"
+                  type="text" id="beacon_uuid" [formControl]="validForm.controls['beaconUUID']" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="controls">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <label class="required beaconMajor" for="beacon_major">Major</label>
+
+                <input class="required form-control beaconMajor" type="number" id="beacon_major" [formControl]="validForm.controls['beaconMajor']"
+                />
+              </div>
+            </div>
+
+            <div class="col-xs-6">
+              <div class="form-group">
+                <label for="beacon_major" class="beaconMinor required">Minor</label>
+
+                <input class="required required form-control beaconMinor" type="number" id="beacon_major" [formControl]="validForm.controls['beaconMinor']"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div #eddystone class="control-group eddystone-container" style="display: none;">
+        <div class="row">
+          <div class="controls">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <label class="required beaconNamespace" for="beacon_namespace">Namespace</label>
+
+                <input class="required beaconNamespace form-control" type="text" id="beacon_namespace" [formControl]="validForm.controls['beaconNamespace']"
+                />
+              </div>
+            </div>
+
+            <div class="col-xs-6">
+              <div class="form-group">
+                <label class="required beaconInstance" for="beacon_instance">Instance ID</label>
+
+                <input class="required beaconInstance form-control" type="text" id="beacon_instance" [formControl]="validForm.controls['beaconInstance']"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class=" row ">
+          <div class="col-xs-12 ">
+            <div class="controls ">
+              <div class="form-group ">
+                <label class="required beaconInterval" for="beacon_signal_interval ">Signal interval</label>
+
+                <input class="required beaconInterval form-control " value="0" type="number " id="beacon_signal_interval" [formControl]="validForm.controls['beaconInterval']"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="well control-group test-notification-group with-huge-space ">
+        <div class="fields ">
+          <div class="form-group optional " style="margin-bottom: 0px; ">
+            <div class="beacon-wrapper ">
+              <div class="boolean ">
+                <div class="custom-checkbox">
+                  <input type="checkbox" id="beacon_activity_trigger_attributes_test" (change)="toggleBeaconNotification(beaconnotification,
+                    $event);" [formControl]="validForm.controls['beaconTestActivity']" />
+                  <label class="checkbox" for="beacon_activity_trigger_attributes_test">
+                      Test this beacon
+                      <span class="grayed ">
+                        (send the notification to your
+                        <a target="_blank ">BeaconControl mobile app)</a>
+                      </span>
+                      </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div #beaconnotification class="margin-t15 " style="display: none; ">
+          <div class="fields ">
+            <div class="fields ">
+              <div class="form-group required ">
+                <label class="control-label " for="beacon_activity_name ">Title</label>
+                <input class="required form-control col-xs-6 " value="Hello world! " placeholder="Hello world! " type="text
+                  " id="beacon_activity_name" [formControl]="validForm.controls['beaconActivityName']" />
+              </div>
+
+              <div class="form-group optional ">
+                <label class="control-label " for="beacon_activity_custom_attributes_attributes_0_value ">Message</label>
+                <input value="Your beacon is working. " placeholder="Your beacon is working. " class="optional form-control
+                  " type="text " id="beacon_activity_custom_attributes_attributes_0_value" [formControl]="validForm.controls['beaconAttributeText']"
+                />
+              </div>
+
+              <div class="form-break-line "></div>
+
+              <div class="form-group ">
+                <label class="control-label " for="beacon_activity_trigger_attributes_event_type ">Trigger</label>
+                <select class="form-control selectpicker col-xs-6 " id="beacon_activity_trigger_attributes_event_type " [formControl]="validForm.controls['beaconTriggerType']">
+            <option selected="selected " value="enter ">On Hello</option>
+            <option value="leave ">On Exit</option>
+            <option value="near ">Nearby</option>
+            <option value="far ">In Sight</option>
+            <option value="immediate ">Almost Touching</option>
+            <option value="dwell_time ">DwellTime</option>
+          </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 second-column "></div>

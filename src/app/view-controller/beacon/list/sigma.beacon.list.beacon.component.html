@@ -1,0 +1,99 @@
+<style>
+  .bootstrap-select .dropdown-toggle:focus {
+    outline: none !important;
+  }
+
+</style>
+<div class="beacons-table linked-rows">
+  <div class="table-header">
+    <form>
+      <div class="row">
+        <div class="col-md-2 col-sm-4 col-xs-12">
+          <a [routerLink]="['../new']" class="btn-success btn btn-action-new btn-static-width">Add Beacon</a>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 zone-select">
+          <select id="filter_beacon_zone" class="selectpicker" data-live-search="true" data-size="10" data-header="Filter by Zone">
+            <option value="" style="border-color:transparent; display:none;">Filter by Zone</option>
+            <option value="" class="with-border" style="border-color: #494846;">Unassigned</option>
+            <ng-template ngFor let-zone [ngForOf]="zones">
+              <option value="{{zone.id}}" class="with-border" [ngStyle]="{'border-color': zone.color}">{{zone.name}}</option>
+            </ng-template>
+          </select>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 floor-select">
+          <select id="filter_beacon_floor" class="selectpicker" data-live-search="true" data-size="false" data-header="Filter by Floor">
+            <option value="" class="hidden">Filter by Floor</option>
+            <ng-template ngFor let-floor [ngForOf]="floors">
+              <option value="{{floor.name}}">{{floor.name}}</option>
+            </ng-template>
+          </select>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-12 batch-delete">
+          <a class="btn-danger btn btn-action-batch_delete" *ngIf="showBulkAction" (click)="onShowDeleteModal(true);">Delete Beacons</a>
+        </div>
+        <div class="col-md-3 col-sm-8 col-xs-12 pull-right">
+          <div class="has-feedback">
+            <div class="form-group string optional search_table_beacon_name">
+              <input name="beacon_name" class="string optional form-control sortable_table_search_field" [(ngModel)]="searchText" placeholder="Search..."
+                type="text" id="search_table_beacon_name"></div>
+            <i class="glyphicon glyphicon-search form-control-feedback"></i>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <table class="table table-list table-striped live-search-table">
+    <thead>
+      <tr>
+        <th colspan="2" class="select-all-checkbox">
+          <div class="custom-checkbox" *ngIf="beacons.length > 0">
+            <input type="checkbox" class="checkbox" id="select_all_beacons" [formControl]="allCheckboxController" />
+            <label for="select_all_beacons">
+            </label>
+          </div>
+        </th>
+        <th class="sortable">
+          <a (click)="onSortTable('name', $event);">Beacon Name</a>
+        </th>
+        <th class="sortable">
+          <a (click)="onSortTable('type', $event);">Protocol</a>
+        </th>
+        <th class="sortable">
+          <a (click)="onSortTable('zone', $event, 'name');">Zone</a>
+        </th>
+        <th class="sortable">
+          <a (click)="onSortTable('floor', $event, 'name');">Floor</a>
+        </th>
+        <th class="sortable hide-on-mobile">
+          <a (click)="onSortTable('addedOn', $event);">Added on</a>
+        </th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-template ngFor let-beacon [ngForOf]="beacons | SearchPipe : {'search': searchText, 'properties':['name', 'zone.name']}">
+        <tr>
+          <td class="zone-mark disable-select" [ngStyle]="{'background-color': beacon.zone.color ? beacon.zone.color : '#494846'}"></td>
+          <td class="with-checkbox">
+            <div class="custom-checkbox">
+              <input type="checkbox" value="3543" id="beacon_{{beacon.id}}" class="checkbox value-checkbox" (change)="toggleBulkActions(beacon.id, $event)"
+                [checked]="selectedBeaconsMap[beacon.id]" />
+              <label for="beacon_{{beacon.id}}"></label>
+            </div>
+          </td>
+          <td>{{beacon.name}}</td>
+          <td>{{beacon.type}}</td>
+          <td>{{beacon.zone.name}}</td>
+          <td>{{beacon.floor.name === 0 ? 'N/A' : beacon.floor.name}}</td>
+          <td class="hide-on-mobile">{{beacon.addedOn.getFormattedDate()}}</td>
+          <td class="disable-select">
+            <div class="row">
+              <a class="btn-default btn btn-action-edit" [routerLink]="['..', beacon.id, 'edit']">Edit</a>
+              <a class="btn-danger btn" (click)="onShowDeleteModal(false, beacon.id);">Delete</a>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
+</div>

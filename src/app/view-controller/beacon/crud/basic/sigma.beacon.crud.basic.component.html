@@ -1,0 +1,157 @@
+<div class="col-md-6 first-column">
+  <div class="control-group">
+    <div class="controls">
+      <div class="required form-group">
+        <label class="required control-label beaconName" for="beaconName">Beacon Name</label>
+
+        <input class="required form-control beaconName" type="text" name="beaconName" id="beaconName" [formControl]="validForm.controls['beaconName']"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <div class="optional form-group">
+        <label class="optional control-label" for="beacon_vendor">Vendor</label>
+
+        <select class="select optional form-control selectpicker event-publisher" data-live-search="true" id="beacon_vendor" [formControl]="validForm.controls['beaconVendor']">
+                    <option value="Beaconinside">Beaconinside</option>
+                    <option value="BlueCats">BlueCats</option>
+                    <option value="BlueSense">BlueSense</option>
+                    <option value="Estimote">Estimote</option>
+                    <option value="Gelo">Gelo</option>
+                    <option value="Gimbal by Qualcomm">Gimbal by Qualcomm</option>
+                    <option value="Glimworm">Glimworm</option>
+                    <option value="Kontakt">Kontakt</option>
+                    <option selected="selected" value="Other">Other</option>
+                    <option value="Sonic Notify">Sonic Notify</option>
+                  </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="control-group" style="display: none;">
+    <div class="controls">
+      <div class="optional form-group">
+        <label class="optional control-label" for="beacon_vendor_uid">
+                    Device ID
+                    <div class="tooltip-button-wrapper">
+                      <div style="font-size: 18px !important; position: absolute; top: -14px;"class="fa fa-info-circle" 
+                      tooltip="4-characters code you can find on the bottom of your beacon device" placement="right"> </div>
+                    </div>
+                  </label>
+        <input class="optional form-control" type="text" id="beacon_vendor_uid" />
+      </div>
+    </div>
+  </div>
+  <div id="beacon-state-data" class="with-huge-space form-control control-group beacon-state" *ngIf="isEdit && beacon.config">
+    <div id="beacon-working-status" class="row">
+      <div class="col-xs-12">
+        Status:
+        <strong>{{beacon.config.status}}</strong>
+      </div>
+    </div>
+    <div id="beacon-device-id" class="row">
+      <div class="col-xs-12">
+        Device ID:
+        <strong>{{beacon.config.device_id}}</strong>
+      </div>
+    </div>
+    <div id="beacon-device-type" class="row">
+      <div class="col-xs-12">
+        Vendor:
+        <span class="event-publisher" data-init="true">
+          <strong>{{beacon.config.vendor}}</strong>
+        </span>
+      </div>
+    </div>
+    <div id="beacon-firmware" class="row">
+      <div class="col-xs-12">
+        Firmware:
+        <strong>{{beacon.config.firmware}}</strong>
+      </div>
+    </div>
+    <div id="beacon-battery" class="row">
+      <div class="col-xs-12">
+        Battery:
+        <strong>{{beacon.config.battery}}</strong>
+      </div>
+    </div>
+    <div id="beacon-last-action" class="row">
+      <div class="col-xs-12">
+        Last action:
+        <strong>{{beacon.config.last_action}}</strong>
+      </div>
+    </div>
+    <div id="beacon-average-connection-interval" class="row">
+      <div class="col-xs-12">
+        Average connection intervals:
+        <strong>{{beacon.config.average_connection_intervals}}</strong>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-6 second-column">
+  <div>
+    <div #beaconmap id="beacon-map" style="height: 250px; position: relative; overflow: hidden;"></div>
+    <div class="control-group">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="optional form-group">
+            <label class="optional control-label" for="beacon_floor">Floor</label>
+            <select class="select optional form-control selectpicker show-tick" data-live-search="true" id="beacon_floor" [formControl]="validForm.controls['beaconFloor']">
+                        <option value="">N/A</option>
+                        <ng-template ngFor let-floor [ngForOf]="floors">
+                          <option value="{{floor.name}}">{{floor.name}}</option>
+                        </ng-template>
+                      </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="optional form-group">
+            <label class="optional control-label" for="beacon_zone_id">Zone</label>
+            <select class="select optional form-control selectpicker show-tick select-with-border" data-live-search="true" id="beacon_zone_id"
+              (change)="onZoneChanged($event)" [formControl]="validForm.controls['beaconZone']">
+                        <option value="0-#494846" class="with-border" style="border-color: #494846;">Unassigned</option>
+                        <ng-template ngFor let-zone [ngForOf]="zones">
+                          <option value="{{zone.id}}-{{zone.color}}" class="with-border" [ngStyle]="{'border-color': zone.color}">{{zone.name}}</option>
+                        </ng-template>
+                      </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="location">
+        <div class="optional form-group">
+          <label class="optional control-label" for="beacon_location">Location</label>
+          <input #beaconlocation class="optional form-control" type="text" id="beacon_location" [formControl]="validForm.controls['beaconLocation']"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class=" control-group ">
+      <div class="controls ">
+        <div class="row ">
+          <div class="col-md-6 ">
+            <div class="form-group optional ">
+              <label class="optional control-label " for="beacon_lat ">Latitude</label>
+              <input class="optional form-control " type="text " id="beacon_lat " [formControl]="validForm.controls['beaconLat']" />
+            </div>
+          </div>
+
+          <div class="col-md-6 ">
+            <div class="form-group optional ">
+              <label class="optional control-label " for="beacon_lng ">Longitude</label>
+              <input class="string optional form-control " type="text " id="beacon_lng " [formControl]="validForm.controls['beaconLng'] "
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div>
+  <label class="btn activity-type {{name}}" [ngClass]="{'active': active}" (click)="toggleActive($event);">
+	  <input type="radio" [value]="value" [checked]="active" [name]="name"/>
+	  <span class="custom-button-view" [ngClass]="{'has-description': radioDescription !== ''}">
+		  <span class="custom-button-name">{{radioName}}</span>
+		  <span class="custom-button-description">{{radioDescription}}</span>
+		</span>
+	</label>
+</div>

@@ -1,0 +1,15 @@
+<style>
+  .bootstrap-select .dropdown-toggle:focus {
+    outline: none !important;
+  }
+
+</style>
+<sigma-beacon-tabs [tabs]="['Basic', 'Settings']" [cancelRoute]="['/app', 'beacons', 'list']" [footerButtons]="footerButtons"
+  [validFormGroup]="validForm" [validatorsPerTab]="validatorsPerTab" [currentTab]="'Basic'">
+  <sigma-beacon-tabcontent [tabId]="'Basic'">
+    <sigma-beacon-crud-basic-beacon [beacon]="beacon" [validForm]="validForm"></sigma-beacon-crud-basic-beacon>
+  </sigma-beacon-tabcontent>
+  <sigma-beacon-tabcontent [tabId]="'Settings'" [displayStyle]="'none'">
+    <sigma-beacon-crud-settings-beacon [validForm]="validForm"></sigma-beacon-crud-settings-beacon>
+  </sigma-beacon-tabcontent>
+</sigma-beacon-tabs>

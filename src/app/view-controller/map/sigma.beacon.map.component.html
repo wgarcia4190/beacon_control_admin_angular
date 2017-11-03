@@ -1,0 +1,100 @@
+<div class="map-view">
+  <form id="beacon-filter-form">
+    <div class="row">
+      <div class="col-xs-5 col-sm-3 col-md-2 col-lg-2">
+        <a class="btn-sucess btn-action-save btn btn-static-width btn-action-add_beacon">Add Beacon</a>
+      </div>
+      <div class="col-xs-7 col-sm-6 col-md-6 col-lg-4" *ngIf="beacon !== undefined">
+        <div id="beacon-actions" class="row">
+          <div class="col-xs-6" id="set-zone">
+            <select class="select optional form-control selectpicker show-tick select-with-border" name="selected-zone" data-live-search="true"
+              id="beacon_zone_id" (change)="updateZone($event);" [(ngModel)]="beacon.zone.uniqueIdentifier">
+                        <ng-template ngFor let-zone [ngForOf]="zoneList">
+                          <option [value]="zone.uniqueIdentifier" class="with-border" [ngStyle]="{'border-color': zone.color}">{{zone.name}}</option>
+                        </ng-template>
+                      </select>
+          </div>
+          <div class="col-xs-6" id="set-floor">
+            <div class="form-group select required beacon_set_floor">
+              <select class="select optional form-control selectpicker show-tick" (change)="updateFloor($event);" data-live-search="true"
+                id="beacon_floor">
+                    <option value="0">N/A</option>
+                    <ng-template ngFor let-floor [ngForOf]="floors">
+                      <option value="{{floor.name}}">{{floor.name}}</option>
+                    </ng-template>
+                  </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-8 col-xs-12 pull-right">
+        <div class="has-feedback">
+          <div class="form-group string required beacon_name">
+            <input class="required form-control beacon-filter" placeholder="Search..." type="text" id="beacon_name">
+          </div>
+          <i class="glyphicon glyphicon-search form-control-feedback" style="margin-top: 5px;"></i>
+        </div>
+      </div>
+    </div>
+    <div class="row map-view-top-container">
+      <div class="map-view-container">
+        <div class="map-view-sidebar">
+          <h5>Select floor</h5>
+          <div class="map-view-sidebar-section without-border">
+            <div class="form-group select required beacon_floor">
+              <select #floorFilter class="select required form-control selectpicker" id="beacon_floor" (change)="filterByFloor(floorFilter.value);">
+                  <option value="all">All</option>
+                  <option value="0">N/A</option>
+                  <ng-template ngFor let-floor [ngForOf]="floors">
+                    <option value="{{floor.name}}">{{floor.name}}</option>
+                  </ng-template>
+                </select>
+            </div>
+          </div>
+          <h5>Filter zone</h5>
+          <div class="map-view-sidebar-section">
+            <div class="zones-list">
+              <ng-template ngFor let-zone [ngForOf]="zones">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <label class="zone-choose-label">
+                         <span class="zone-mark" [style.border-color]="zone.color">
+                            {{zone.name}}
+                         </span>
+                         <input type="checkbox" class="bootstrap-switch" checked [attr.data-zonename]="zone.name"/>
+                      </label>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+          <div class="beacon-info" *ngIf="beacon !== undefined">
+            <h5>Beacon Information</h5>
+            <div class="map-view-sidebar-section">
+              <div class="beacon-details">
+                <h5>
+                  <span class="zone-mark" [style.border-color]="beacon.zone.color">
+                    <strong>{{beacon.name}}</strong>
+                        </span>
+                </h5>
+                <ul>
+                  <li>Zone: <strong>{{beacon.zone.name}}</strong></li>
+                  <li>Floor: <strong>{{beacon.floor.name === 0 ? 'N/A' : beacon.floor.name}}</strong></li>
+                </ul>
+                <ul>
+                  <li>Latitude: <strong>{{beacon.lat}}</strong></li>
+                  <li>Longitude: <strong>{{beacon.lng}}</strong></li>
+                </ul>
+              </div>
+              <div class="beacon-actions">
+                <a class="btn btn-success btn-block btn-action-edit" [routerLink]="['..', 'beacons', beacon.id, 'edit']">Edit</a>
+                <a class="btn btn-default btn-block btn-action-delete" id="delete-beacon" (click)="onShowDeleteModal();">Delete</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div #mapContainer id="beacons-map" style="position: relative; overflow: hidden;"></div>
+      </div>
+    </div>
+  </form>
+</div>

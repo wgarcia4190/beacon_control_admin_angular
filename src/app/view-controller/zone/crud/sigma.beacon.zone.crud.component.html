@@ -1,0 +1,83 @@
+<form class="zone-form with-sticky-footer" [formGroup]="validForm">
+  <div class="row form-container">
+    <div class="col-md-6 first-column">
+      <div class="control-group row">
+        <div class="controls">
+          <div class="col-xs-9 zone-name">
+            <div class="form-group required">
+              <label class="control-label required" for="zone_name">Zone Name</label>
+              <input #zoneName class="form-control required" type="text" id="zone_name" style="border-left-color: #7e53c5" [formControl]="validForm.controls['zoneName']"
+              />
+            </div>
+          </div>
+          <div class="col-xs-3 zone-color">
+            <div #colorButton class="color-button inline-button btn btn-default dropdown-toggle" style="border 0px; background-color: #7e53c5;"
+              (click)="toggleColorPicker($event);">
+              Color
+              <span class="caret"></span>
+            </div>
+            <div class="form-group hidden zone_color">
+              <input value="#9bcd5f" class="hidden form-color" type="hidden" name="zone[color]" id="zone_color" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <div class="form-group">
+            <label class="control-label optional" for="zone_description">Description</label>
+            <textarea #zoneDescription rows="4" class="form-control" id="zone_description" [formControl]="validForm.controls['zoneDescription']"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 second-column">
+      <div class="elements-select">
+        <div class="control-group">
+          <div class="controls add-beacon-dropdown">
+            <div class="form-group zone_add_beacon">
+              <label class="control-label" for="zone_add_beacon">Assign beacons</label>
+              <div #beaconSelectContainer class="input-group" style="visibility: hidden;">
+                <select #beaconSelect class="select optional form-control chained-target selectpicker" data-live-search="true" data-live-search-placeholder="Search for a beacon"
+                  id="zone_add_beacon" style="float: left;">
+                  <ng-template ngFor let-beacon [ngForOf]="beacons">
+                    <option value="{{beacon.id}}">{{beacon.name}}</option>
+                  </ng-template>
+                  </select>
+                <span class="input-group-addon btn btn-success add-element btn btn-action-new" style="display: table-cell; padding: 0px; cursor: pointer;"
+                  (click)="addBeaconToZone(beaconSelect.value);">Add</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br> Currently assigned beacons:<span class="beacons-count">{{zone.beaconsCount}}</span>
+        <table class="table beacon-table" style="margin-top: 5px;">
+          <tbody>
+            <ng-template ngFor let-beacon [ngForOf]="zone.beacons">
+              <tr class="currently-assined-beacon">
+                <td class="col-xs-6 currently-assigned-beacon-name">{{beacon.name}}</td>
+                <td class="col-xs-4 currently-assigned-beacon-floor">Floor: {{beacon.floor.name}}</td>
+                <td class="col-xs-2 active remove-element btn-danger currently-assigned-beacon-delete" style="cursor: pointer;" (click)="removeBeaconFromZone($event, beacon.id);">
+                  <span style="cursor: pointer;" (click)="removeBeaconFromZone($event, beacon.id);">Remove</span>
+                </td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row actions-row sticky-footer">
+    <div class="col-xs-6">
+      <div class="pull-left">
+        <a class="btn btn-danger btn-action-delete btn-static-width with-modal" (click)="deleteZone();" *ngIf="isEdit">Delete</a>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="pull-right">
+        <a class="btn-default btn btn-action-cancel btn-static-width" [routerLink]="['/app', 'zones', 'list']">Cancel</a>
+        <input type="submit" name="commit" value="Save Zone" class="btn btn btn-success btn-static-width btn-action-save" (click)="saveZone(zoneName.value, zoneDescription.value);">
+      </div>
+    </div>
+  </div>
+</form>

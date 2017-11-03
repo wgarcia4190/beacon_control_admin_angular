@@ -1,0 +1,39 @@
+<ul class="items-list applications-list">
+  <ng-template ngFor let-app [ngForOf]="apps">
+    <li class="col-lg-4 col-md-6 col-xs-12">
+      <div class="controls">
+        <a (click)="deleteApplication(app.id);">
+          <span class="fa fa-times"></span>
+        </a>
+      </div>
+      <a class="item-box edit" style="border-top-color: #f17f03;" (click)="showApplication(app.id, app.name);">
+        <h3>{{app.name}}</h3>
+      </a>
+    </li>
+  </ng-template>
+  <div #createApplicationContainer class="application-form" style="display: none;">
+    <li class="col-lg-4 col-md-6 col-xs-12 create-application">
+      <div class="controls">
+        <a #saveApplicationButton (click)="saveApplication(applicationNameInput.value, applicationNameInput);" class="accept" style="display: none;">
+          <span class="fa fa-check"></span>
+        </a>
+        <a (click)="toggleCreateAppForm(applicationNameInput);">
+          <span class="fa fa-times"></span>
+        </a>
+      </div>
+      <a class="item-box">
+        <form class="simple_form application">
+          <h3>
+            <input #applicationNameInput label="false" class="required form-control no-border" placeholder="Name your App" type="text"
+              (keyup)="checkApplicationName($event);" />
+          </h3>
+        </form>
+      </a>
+    </li>
+  </div>
+  <li #addApplication class="col-lg-4 col-md-6 col-xs-12 add-application">
+    <a class="item-box add" (click)="toggleCreateAppForm(applicationNameInput);">
+      <div>+</div>
+    </a>
+  </li>
+</ul>

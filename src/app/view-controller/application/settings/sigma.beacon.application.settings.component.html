@@ -1,0 +1,43 @@
+<div class="row form-container">
+  <div class="col-md-6 first-column">
+    <form novalidate="novalidate" class="simple_form edit_application">
+      <h3>Main</h3>
+      <div class="form-group string optional application_name">
+        <label class="string optional control-label" for="application_name">Application name</label>
+        <input class="string optional form-control" type="text" value="{{application.name}}" name="application[name]" id="application_name">
+      </div>
+      <div class="form-group string optional readonly application_uid">
+        <label class="string optional control-label" for="application_uid">Client ID</label>
+        <input class="string optional readonly form-control" readonly="readonly" type="text" value="{{application.uid}}}" name="application[uid]"
+          id="application_uid">
+      </div>
+      <div class="form-group string optional readonly application_secret">
+        <label class="string optional control-label" for="application_secret">Client secret</label>
+        <input class="string optional readonly form-control" readonly="readonly" type="text" value="{{application.secret}}" name="application[secret]"
+          id="application_secret">
+      </div>
+      <div class="form-group clearfix">
+        <input type="button" name="commit" value="Save" class="btn btn btn-action-save btn-static-width pull-right">
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6 second-column">
+    <form novalidate="novalidate" class="simple_form edit_application">
+      <h3>APNS Sandbox</h3>
+      <div class="fields">
+        <div class="form-group password optional application_apns_app_production_passphrase">
+          <label class="password optional control-label" for="application_apns_app_production_attributes_passphrase">Passphrase</label>
+          <input class="password optional form-control" placeholder="Passphrase" type="password" name="application[apns_app_production_attributes][passphrase]"
+            id="application_apns_app_production_attributes_passphrase">
+        </div>
+        <div class="form-group file optional application_apns_app_production_cert_p12">
+          <label class="file optional control-label" for="application_apns_app_production_attributes_cert_p12">P12 Certificate</label>
+          <input class="file optional form-control" type="file" name="application[apns_app_production_attributes][cert_p12]" id="application_apns_app_production_attributes_cert_p12">
+        </div>
+        <div class="form-group clearfix">
+          <input type="button" name="commit" value="Save" class="btn btn btn-action-save btn-static-width pull-right">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

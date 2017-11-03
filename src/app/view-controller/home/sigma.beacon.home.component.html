@@ -1,0 +1,35 @@
+<div class="home">
+  <h1>Welcome to BeaconControl!</h1>
+  <p class="subtitle">This is the place where you’ll manage your beacon infrastructure and configure actions triggered in your mobile applications.
+    Why don’t you start by adding some beacons? Then you can create your first application, add actions and start monitoring
+    your beacons’ usage.</p>
+  <div class="row">
+    <div class="col-lg-4 col-md-6">
+      <div class="tile">
+        <h2>NEW BEACON</h2>
+        <p>Adding the beacon is fast and easy. Recognize your beacon with UUID, and the major and minor numbers provided by
+          its supplier, and then locate your beacon on the map. Now you're ready to setup actions for it, test it on BeaconControl
+          mobile application and use in further development.</p>
+        <a class="btn btn-success" [routerLink]="['/app/beacons/new']">Add Beacon</a>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="tile">
+        <h2>NEW ZONE</h2>
+        <p>Link your beacons into zones to create an extended range for your beacon deployment. Extended ranges create an area
+          in which specified zone actions are triggered, improving the efficiency of beacon management and mapping. Use this
+          feature to magnify the effect of single beacons.</p>
+        <a class="btn btn-success" href="/beacons/new">Add Zone</a>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="tile">
+        <h2>NEW APPLICATION</h2>
+        <p>Our iOS test application is a good start but you'll want to connect your own at the end. Use automatically generated
+          keynumbers to match your setup with your mobile applications. You can also embed our opensource SDK for iOS to
+          speed up your project development.</p>
+        <a class="btn btn-success" href="/beacons/new">Add Application</a>
+      </div>
+    </div>
+  </div>
+</div>

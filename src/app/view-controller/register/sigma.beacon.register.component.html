@@ -1,0 +1,39 @@
+<div>
+  <div class="admin-access-topbar">
+    <div class="container">
+      <a href="http://www.sigmaplus.com.do">
+        <div class="logo"></div>
+      </a>
+    </div>
+  </div>
+  <div class="admin-access">
+    <div class="center-vertically">
+      <h1>SIGMAPLUS Beacon Panel</h1>
+      <h2>
+        Sign up
+      </h2>
+      <div class="alert alert-error" *ngIf="emailExist" style="padding: 0;">Please review the problems below:</div>
+      <form>
+        <div class="form-group email optional admin_email">
+          <input #username class="string email optional form-control valid" autofocus="autofocus" placeholder="your email" type="email"
+            value="" name="admin[email]" id="admin_email" aria-required="true" aria-invalid="false" [ngClass]="{'has-error': emailExist}"
+          />
+        </div>
+        <span class="help-inline" *ngIf="emailExist">has already been taken</span>
+        <input type="submit" name="commit" value="Sign Up" class="btn btn btn-sm btn-success pull-right" (click)="register(username.value);"
+        />
+        <a [routerLink]="['/login']">Have an account? Log in</a>
+      </form>
+    </div>
+  </div>
+  <footer>
+    <div class="container">
+      <div class="row">
+
+        <p>To give you the best online experience, we use cookies on our site. By using our website you agree to the usage of
+          cookies in accordance with your browser’s current settings. Read more about our <a href="/privacy">privacy policy.</a></p>
+
+      </div>
+    </div>
+  </footer>
+</div>

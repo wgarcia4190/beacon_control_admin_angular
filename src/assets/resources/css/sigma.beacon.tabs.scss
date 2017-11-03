@@ -1,0 +1,44 @@
+@import './_variables.scss';
+div.form-container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.page-subheader {
+  background: #fff;
+  border-bottom: 1px solid #f4f4f4;
+  border-top: 3px solid #f4f4f4;
+  ul {
+    margin-bottom: 0px !important;
+    padding-left: 20px;
+    li {
+      display: inline-block;
+      height: 55px;
+      margin: 0 20px;
+      border-bottom: 6px solid transparent;
+      &:first-child {
+        margin-left: 0;
+      }
+      &.active {
+        border-bottom: 4px solid $primary-color;
+        font-weight: 600;
+      }
+      &.active:not(.extension) {
+        pointer-events: none;
+        cursor: default;
+      }
+      a {
+        font-size: 17px;
+        font-weight: 100;
+        color: #000;
+        padding: 14px 20px;
+        text-decoration: none;
+        display: block;
+      }
+    }
+  }
+}
+
+.page-subheader ul li:hover:not(.active) {
+  background-color: #f8f9fa;
+}

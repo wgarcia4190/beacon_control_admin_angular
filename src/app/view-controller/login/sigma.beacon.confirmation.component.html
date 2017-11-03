@@ -1,0 +1,44 @@
+<div>
+  <div class="admin-access-topbar">
+    <div class="container">
+      <a href="http://www.sigmaplus.com.do">
+        <div class="logo"></div>
+      </a>
+    </div>
+  </div>
+  <div class="admin-access">
+    <div class="center-vertically">
+      <h1>SIGMAPLUS Beacon Panel</h1>
+      <h2>
+        Set password
+      </h2>
+      <form>
+        <div class="form-group email optional secure_token">
+          <input #securityToken class="string email optional form-control valid" autofocus="autofocus" placeholder="Security Token"
+            type="password" value="" name="admin[secure]" id="secure_token" aria-required="true" aria-invalid="false" />
+        </div>
+        <div class="form-group email optional admin_password">
+          <input #password class="string email optional form-control valid" autofocus="autofocus" placeholder="password" type="password"
+            value="" name="admin[paswword]" id="admin_password" aria-required="true" aria-invalid="false" />
+        </div>
+        <div class="form-group password optional admin_confirmpassword">
+          <input #confirmpassword class="password optional form-control" placeholder="confirm password" type="password" name="admin[confirmpassword]"
+            id="admin_confirmpassword" />
+        </div>
+        <input type="submit" name="commit" value="Change Password" class="btn btn btn-sm btn-success pull-right" (click)="setPassword(securityToken.value, password.value, confirmpassword.value);"
+        />
+        <a href="/login">Return to Log in</a>
+      </form>
+    </div>
+  </div>
+  <footer>
+    <div class="container">
+      <div class="row">
+
+        <p>To give you the best online experience, we use cookies on our site. By using our website you agree to the usage of
+          cookies in accordance with your browser’s current settings. Read more about our <a href="/privacy">privacy policy.</a></p>
+
+      </div>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,144 @@
+#beacon-map {
+  width: 100%;
+  height: 450px;
+  border: 1px solid #ccc;
+  margin-bottom: 25px;
+}
+
+form.tabs-form .test-notification-group,
+form.admins-form .test-notification-group {
+  border-color: #C1C1C1;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+}
+
+.well {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #e3e3e3;
+  border: 1px solid #C1C1C1;
+  border-radius: 0px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.test-notification-group {
+  padding-top: 0px;
+  padding-bottom: 15px;
+}
+
+.with-huge-space {
+  margin-top: 25px;
+}
+
+form.tabs-form .test-notification-group label,
+form.admins-form .test-notification-group label {
+  font-size: 12px;
+  color: #393939;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+}
+
+form.tabs-form .trigger-test .form-group {
+  margin-bottom: 0;
+}
+
+.beacon-wrapper .boolean {
+  margin: 3px 0 -10px 0;
+}
+
+.custom-checkbox,
+.beacon-wrapper .boolean {
+  position: relative;
+}
+
+.beacon-wrapper .boolean label:before {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  top: -2px;
+}
+
+.custom-checkbox label:before,
+.beacon-wrapper .boolean label:before {
+  background: #fff;
+  border: 1px solid #d5d5d5;
+  content: '';
+  display: inline-block;
+  height: 16px;
+  left: 6px;
+  position: absolute;
+  top: 9px;
+  width: 16px;
+}
+
+.custom-checkbox input:checked+label:before,
+.beacon-wrapper .boolean input:checked+label:before {
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-image: url(/assets/resources/imgs/icon-checked.png) !important;
+  background-color: #f17f03 !important;
+  border: 1px solid #E06c03 !important;
+  cursor: pointer !important;
+}
+
+.custom-checkbox input,
+.beacon-wrapper .boolean input {
+  display: none;
+}
+
+form.tabs-form .test-notification-group label,
+form.admins-form .test-notification-group label {
+  font-size: 12px;
+  color: #393939;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+}
+
+.beacon-wrapper .boolean label {
+  line-height: 15px;
+  padding-left: 30px;
+}
+
+.custom-checkbox label,
+.beacon-wrapper .boolean label {
+  cursor: pointer;
+  display: inline-block;
+  padding-left: 32px;
+  padding-top: 10px;
+}
+
+form.tabs-form .test-notification-group .form-break-line,
+form.admins-form .test-notification-group .form-break-line {
+  background-color: #C1C1C1;
+  height: 1px;
+  padding: 0;
+  margin: 0 -18px 15px -18px;
+}
+
+form.tabs-form .test-notification-group .col-xs-6,
+form.admins-form .test-notification-group .col-xs-6 {
+  width: 50%;
+  float: none;
+}
+
+form.tabs-form .test-notification-group label.control-label,
+form.admins-form .test-notification-group label.control-label {
+  width: 100%;
+}
+
+.control-group.beacon-state {
+  background: transparent;
+  height: auto !important;
+}
+
+.control-group.beacon-state>.row:first-of-type {
+  margin-top: 3px;
+}
+
+.control-group.beacon-state>.row {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}

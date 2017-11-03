@@ -1,0 +1,178 @@
+<style>
+  .elements-select table tr td {
+    border: 1px solid #D5D5D5 !important;
+  }
+
+</style>
+
+<form class="simple_form edit_activity with-sticky-footer">
+  <div class="row form-container url-scheme">
+    <div class="col-md-6 first-column">
+      <h3>Essentials</h3>
+      <div class="fields">
+        <label class="required control-label" for="activity_trigger_attributes_type">Based on</label>
+        <div class="range-buttons row">
+          <sigma-beacon-square-radio-content #typeActions>
+            <sigma-beacon-square-radio [elementToShow]="'.field-triggered-BeaconTrigger'" [elementToHide]="'.field-triggered-ZoneTrigger'"
+              [name]="'activity_trigger_attributes_type'" [value]="'BeaconTrigger'" [active]="true" [radioName]="'Beacon'"></sigma-beacon-square-radio>
+            <sigma-beacon-square-radio [elementToShow]="'.field-triggered-ZoneTrigger'" [elementToHide]="'.field-triggered-BeaconTrigger'"
+              [name]="'activity_trigger_attributes_type'" [value]="'ZoneTrigger'" [active]="false" [radioName]="'Zone'"></sigma-beacon-square-radio>
+          </sigma-beacon-square-radio-content>
+        </div>
+        <label class="required control-label" for="activity_trigger_attributes_event_type">Trigger</label>
+        <div class="range-field-triggered field-triggered-BeaconTrigger">
+          <div class="range-buttons row">
+            <sigma-beacon-square-radio-content #beaconActions>
+              <sigma-beacon-square-radio [elementToHide]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'enter'" [active]="true" [radioName]="'On Hello'" [radioDescription]="'Trigger an action when a user appears in the beacon range.'"></sigma-beacon-square-radio>
+              <sigma-beacon-square-radio [elementToHide]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'leave'" [active]="false" [radioName]="'On Exit'" [radioDescription]="'Trigger an action when a user leaves the beacon range.'"></sigma-beacon-square-radio>
+              <sigma-beacon-square-radio [elementToHide]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'near'" [active]="false" [radioName]="'Nearby'" [radioDescription]="'Trigger an action when a user is in medium-to-close distance from the beacon. (20cm – 5m)'"></sigma-beacon-square-radio>
+              <sigma-beacon-square-radio [elementToHide]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'far'" [active]="false" [radioName]="'In Sight'" [radioDescription]="'Trigger an action when a user is distant from the beacon. (>5m)'"></sigma-beacon-square-radio>
+              <sigma-beacon-square-radio [elementToHide]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'immediate'" [active]="false" [radioName]="'Almost Touching'" [radioDescription]="'Trigger an action when a user\'s device is in direct proximity of the beacon. (<20cm)'"></sigma-beacon-square-radio>
+              <sigma-beacon-square-radio [elementToShow]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'dwell_time'" [active]="false" [radioName]="'DwellTime'" [radioDescription]="'Trigger an action after customisable amount of time after a user appears in the beacon range.'"></sigma-beacon-square-radio>
+            </sigma-beacon-square-radio-content>
+          </div>
+          <div class="form-group">
+            <div class="elements-select">
+              <div class="control-group">
+                <div class="controls">
+                  <div class="form-group select optional activity_trigger_add_beacon">
+                    <label class="select optional control-label" for="activity_trigger_attributes_add_beacon">Assign to a Beacon</label>
+                    <div class="input-group">
+                      <select #beaconSelector class="select optional form-control selectpicker dropup" data-live-search="true" data-live-search-placeholder="Search for a beacon">
+                              <ng-template ngFor let-beacon [ngForOf]="beacons">
+                                  <option value="{{beacon.id}}">{{beacon.name}}</option>
+                                </ng-template>
+                  </select>
+                      <span class="input-group-addon btn btn-success add-element btn btn-action-new" style="display: table-cell; padding: 0px;"
+                        (click)='addBeaconToActivity(beaconSelector.value)'>Add</span>
+                    </div>
+                    <span *ngIf="showErrorMessage" class="help-inline">can't be blank</span>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+
+              <table class="table table-bordered">
+                <tbody>
+                  <ng-template ngFor let-beacon [ngForOf]="selectedBeacons">
+                    <tr>
+                      <td class="col-xs-11" style="padding: 10px;">{{beacon.name}}</td>
+                      <td class="col-xs-1 active button-holder">
+                        <span class="btn btn-action-delete remove-element" (click)='removeBeaconFromActivity(beacon.id);'>Remove</span>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="range-field-triggered field-triggered-ZoneTrigger" style="display: none;">
+          <div class="range-buttons row">
+            <sigma-beacon-square-radio-content #zoneActions>
+              <sigma-beacon-square-radio [elementToHide]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'enter'" [active]="true" [radioName]="'On Hello'" [radioDescription]="'Trigger an action when a user appears in the zone range.'"></sigma-beacon-square-radio>
+              <sigma-beacon-square-radio [elementToHide]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'leave'" [active]="false" [radioName]="'On Exit'" [radioDescription]="'Trigger an action when a user leaves the zone range.'"></sigma-beacon-square-radio>
+              <sigma-beacon-square-radio [elementToShow]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'dwell_time'" [active]="false" [radioName]="'DwellTime'" [radioDescription]="'Trigger an action after customisable amount of time after a user appears in the zone range.'"></sigma-beacon-square-radio>
+            </sigma-beacon-square-radio-content>
+          </div>
+          <div class="form-group">
+            <div class="elements-select">
+              <div class="control-group">
+                <div class="controls">
+                  <div class="form-group select optional activity_trigger_add_zone">
+                    <label class="select optional control-label">Assign to a Zone</label>
+                    <div class="input-group">
+                      <select #zoneSelector class="select optional form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search for a zone">
+                              <ng-template ngFor let-zone [ngForOf]="zones">
+                                  <option value="{{zone.id}}">{{zone.name}}</option>
+                                </ng-template>
+                    </select>
+                      <span class="input-group-addon btn btn-success add-element btn btn-action-new" style="display: table-cell; padding: 0px;"
+                        (click)="addZoneToActivity(zoneSelector.value);">Add</span>
+                    </div>
+                    <span *ngIf="showErrorMessage" class="help-inline">can't be blank</span>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+
+              <table class="table table-bordered">
+                <tbody>
+                  <ng-template ngFor let-zone [ngForOf]="selectedZones">
+                    <tr>
+                      <td [style.background-color]="zone.color" style="padding: 3px !important;"></td>
+                      <td class="col-xs-11" style="padding: 10px;">{{zone.name}}</td>
+                      <td class="col-xs-1 active button-holder">
+                        <span class="btn btn-action-delete remove-element" (click)='removeZoneFromActivity(zone.id);'>Remove</span>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group field-triggered field-triggered-dwell_time dwell-time-container" style="display: none;">
+          <div class="row">
+            <div class="col-xs-12">
+              <label class="optional control-label" for="activity_trigger_attributes_dwell_time">Dwell time</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 col-md-5 col-lg-4">
+              <input type="text" name="dwell_time_preview" id="dwell_time_preview" value="5 min" class="form-control" disabled />
+            </div>
+            <div class="col-sm-8 col-md-7 col-lg-8 dwell-time-slider-container">
+              <input type="text" class="span2 slider" value="" data-slider-min="5" data-slider-max="60" data-slider-step="1" data-slider-value="5"
+              />
+              <span class="pull-left" style="margin-left: -15px;">5 min</span>
+              <span class="pull-right" style="margin-right: -15px;">60 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 second-column">
+      <h3>URL action</h3>
+      <div class="form-group optional activity_name">
+        <label class="optional control-label" for="activity_name">Action name</label>
+        <input class="required form-control activityName" type="text" value="" name="activity_name" id="activity_name" [formControl]="validForm.controls['activityName']"
+        />
+      </div>
+      <div class="control-group url optional activity_url">
+        <label class="url optional control-label" for="activity_url">URL</label>
+        <div class="controls">
+          <div class="input-append">
+            <div class="input-group">
+              <div class="input-group-addon prefix" style="border-bottom-right-radius: 0; border-top-right-radius: 0; border-right: 0;">http://</div>
+              <input class="required form-control url activityUrl" type="url" value="" name="activity_url" id="activity_url" [formControl]="validForm.controls['activityUrl']"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row actions-row sticky-footer">
+    <div class="col-xs-12">
+      <div class="pull-right">
+        <a class="btn btn-primary btn-action-cancel btn-static-width" [routerLink]="['applications', appId, appName, 'activities']">Cancel</a>
+        <input type="button" name="commit" value="Save action" class="btn btn btn-action-save btn-static-width" (click)="saveActivity();">
+      </div>
+    </div>
+  </div>
+</form>

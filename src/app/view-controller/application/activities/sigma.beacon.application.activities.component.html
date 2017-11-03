@@ -1,0 +1,14 @@
+<style>
+  .bootstrap-select .dropdown-toggle:focus {
+    outline: none !important;
+  }
+
+</style>
+<sigma-beacon-tabs [tabs]="['Actions', 'Settings']" [hasFooter]="false" [validFormGroup]="validForm" [currentTab]="'Actions'">
+  <sigma-beacon-tabcontent [tabId]="'Actions'">
+    <sigma-beacon-activity-list [activitiesEmitter]='dataEmitter'></sigma-beacon-activity-list>
+  </sigma-beacon-tabcontent>
+  <sigma-beacon-tabcontent [tabId]="'Settings'" [displayStyle]="'none'">
+    <sigma-beacon-application-settings [applicationEmitter]='dataEmitter'></sigma-beacon-application-settings>
+  </sigma-beacon-tabcontent>
+</sigma-beacon-tabs>

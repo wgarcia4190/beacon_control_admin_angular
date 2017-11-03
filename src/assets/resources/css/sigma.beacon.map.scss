@@ -1,0 +1,97 @@
+.map-view {
+  padding-top: 16px;
+  .map-view-container {
+    position: relative;
+  }
+  .beacon_floor {
+    margin-bottom: 0;
+  }
+  label.zone-choose-label {
+    height: 50px;
+    margin: 0;
+  }
+  span.zone-mark {
+    border-left: 8px solid;
+    padding-left: 16px;
+    width: 180px;
+    height: 100%;
+    display: inline-block;
+    line-height: 50px;
+    font-weight: normal;
+  }
+  .bootstrap-switch {
+    box-shadow: none;
+    right: -8px;
+  }
+  .map-view-sidebar {
+    z-index: 99;
+    position: fixed;
+    overflow-y: auto;
+    height: calc(100% - 144px);
+    background: rgba(255, 255, 255, 0.7);
+    h5 {
+      font-weight: bold;
+      margin-top: 20px;
+      margin-left: 20px;
+    }
+    .map-view-sidebar-section {
+      margin-left: 20px;
+      margin-right: 20px;
+      width: 300px;
+      box-sizing: border-box;
+      border: 1px solid #d5d5d5;
+      background: #ffffff;
+      &.without-border {
+        border: none;
+      }
+      .zones-list {
+        max-height: 200px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        .row {
+          border-top: 1px solid #d5d5d5;
+          &:first-child {
+            border-top: none;
+          }
+        }
+      }
+    }
+  }
+  .beacon-info {
+    .beacon-details {
+      h5 {
+        margin: 0;
+        border-bottom: 1px solid #95a5a6;
+        .zone-mark {
+          line-height: 40px;
+        }
+      }
+      ul {
+        padding-left: 15px;
+        margin-right: 10px;
+        margin-top: 15px;
+        list-style: none;
+      }
+    }
+    .beacon-actions {
+      margin: 15px;
+    }
+  }
+  #beacon-filter-form {
+    a.btn-success {
+      display: inline-block;
+      width: 100%;
+      padding: 10px 0;
+      margin-bottom: 15px;
+    }
+  }
+  #beacons-map {
+    width: calc(100% - 240px);
+    height: calc(100% - 144px);
+    position: fixed !important;
+  }
+  .bootstrap-switch {
+    box-shadow: none;
+    right: -8px;
+  }
+}

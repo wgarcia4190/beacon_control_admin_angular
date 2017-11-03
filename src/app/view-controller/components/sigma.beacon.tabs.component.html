@@ -1,0 +1,30 @@
+<div class="tab-space tab-manager event-publisher">
+  <div class="row page-subheader">
+    <nav class="col-xs-12">
+      <ul>
+        <ng-template ngFor let-tab [ngForOf]="tabs" let-i="index">
+          <li #parent [ngClass]="{'tab-switcher': true, 'active': i == 0}">
+            <a id="{{tab}}-link" style="cursor: pointer;" data-target="#{{tab}}" [ngClass]="{'tab-switcher': true, 'active': i == 0}"
+              (click)="switchTab(tab, $event, parent);">{{tab}}</a>
+          </li>
+        </ng-template>
+      </ul>
+    </nav>
+  </div>
+  <form class="tabs-form with-sticky-footer" [formGroup]="validFormGroup">
+    <div class="tab-space">
+      <ng-content></ng-content>
+    </div>
+    <div class="row actions-row sticky-footer" *ngIf="hasFooter">
+      <div class="col-xs-12 " id="footer-right">
+        <div class="pull-right">
+          <a class="modify-beacon-actions btn-default btn btn-action-cancel btn-static-width" [routerLink]="cancelRoute">Cancel</a>
+          <ng-template ngFor let-footerButton [ngForOf]="footerButtons">
+            <button id="{{footerButton.id}}" [style.display]="footerButton.displayStyle" name="button" type="button" class="btn-success btn btn-static-width {{footerButton.cssClass}}"
+              (click)="footerButton.event(tabs, currentTab);">{{footerButton.label}}</button>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

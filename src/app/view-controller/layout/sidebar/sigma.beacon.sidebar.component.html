@@ -1,0 +1,20 @@
+<div class="sidebar">
+  <ul class="nav nav-sidebar">
+    <li>
+      <a [ngClass]="selectedRoute === 'home'?'active':''" (click)="navigate('home')"><span class="fa fa-home bos bos-dashboard"></span> Home</a>
+    </li>
+    <li>
+      <a [ngClass]="selectedRoute === 'beacons'?'active':''" (click)="navigate('beacons')"><span class="fa fa-bluetooth-b bos bos-beacon"></span> Beacons</a>
+    </li>
+    <li>
+      <a [ngClass]="selectedRoute === 'zones'?'active':''" (click)="navigate('zones')"><span class="fa fa-dot-circle-o bos bos-zone"></span> Zones</a>
+    </li>
+    <li>
+      <a [ngClass]="selectedRoute === 'map'?'active':''" (click)="navigate('map')"><span class="fa fa-globe bos bos-earth"></span> Map</a>
+    </li>
+    <li>
+      <a [ngClass]="selectedRoute === 'applications'?'active':''" (click)="navigate('applications')"><span class="fa fa-object-group bos bos-application"></span> Applications</a>
+    </li>
+    <li class="walkthrough"><a target="_blank" href="/walkthrough/intro"><span class="fa fa-question-circle-o bos bos-info"></span>User Manual</a></li>
+  </ul>
+</div>

@@ -1,0 +1,21 @@
+<ul class="items-list zones-list">
+  <ng-template ngFor let-zone [ngForOf]="zones">
+    <li class="col-lg-4 col-md-6 col-xs-12">
+      <div class="controls">
+        <a>
+          <span class="fa fa-times" (click)="deleteZone(zone.id);"></span>
+        </a>
+      </div>
+      <a class="item-box edit" [style.border-top-color]="zone.color" [routerLink]="['..', zone.id, 'edit']">
+        <h3>{{zone.name}}</h3>
+        <div class="info">{{zone.children ? zone.children.beacons.length : 'NO'}} {{zone.children ? (zone.children.beacons.length === 1 ? 'beacon'
+          : 'beacons') : 'beacons'}}</div>
+      </a>
+    </li>
+  </ng-template>
+  <li class="col-lg-4 col-md-6 col-xs-12 add-application">
+    <a class="item-box add" [routerLink]="['../new']">
+      <div>+</div>
+    </a>
+  </li>
+</ul>

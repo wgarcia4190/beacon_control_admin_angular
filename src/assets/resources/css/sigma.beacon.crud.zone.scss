@@ -1,0 +1,80 @@
+div.zone-name {
+    padding-right: 0;
+    input {
+        border-radius: 0;
+        border-left-width: 10px;
+    }
+}
+
+.zone-color {
+    padding-left: 0px;
+}
+
+.color-button:hover,
+.color-button:focus .color-button:active .color-button:target {
+    color: #fff;
+    border-width: 1px;
+    border-color: transparent;
+}
+
+.color-button .caret {
+    margin-left: 7px;
+}
+
+div.zone_add_beacon {
+    padding-right: 0;
+}
+
+.add-beacon-dropdown .add-element {
+    padding: 13px;
+}
+
+.beacons-count {
+    margin-left: 5px;
+}
+
+.currently-assined-beacon {
+    display: table-row;
+}
+
+.elements-select table tr td:first-child {
+    line-height: 26px;
+}
+
+.elements-select table tr td {
+    border: 1px solid #D5D5D5;
+    border-width: 1px !important;
+    vertical-align: middle !important;
+}
+
+.currently-assigned-beacon td:not(.currently-assigned-beacon-delete) {
+    border-top: 1px solid #d5d5d5;
+    border-bottom: 1px solid #d5d5d5;
+    border-right: 1px solid #d5d5d5;
+}
+
+.currently-assigned-beacon .currently-assigned-beacon-name {
+    border-left: 1px solid #d5d5d5;
+}
+
+table.beacons-table tbody>tr>td:first-child,
+table.table-responsive tbody>tr>td:first-child {
+    background: #ffffff;
+}
+
+table.beacons-table tbody>tr>td,
+table.table-responsive tbody>tr>td {
+    vertical-align: middle;
+    padding: 10px;
+}
+
+.currently-assigned-beacon-delete {
+    border: 1px solid #d5d5d5 !important;
+    background-color: #e74c3c !important;
+    text-align: center;
+}
+
+table.beacons-table tbody>tr>td:last-child,
+table.table-responsive tbody>tr>td:last-child {
+    text-align: center;
+}

@@ -1,0 +1,119 @@
+<div class="section-group activities">
+  <form>
+    <div class="items-section clearfix">
+      <h2>URL actions</h2>
+      <ul class="items-list">
+        <ng-template ngFor let-urlAction [ngForOf]="urlActions" let-index="index">
+          <li class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+            <div class="controls left">
+              <label class="styled-checkbox styled-checkbox-fa">
+              <input type="checkbox" class="batch-delete-check"/>
+              <span class="fa fa-check"></span>
+            </label>
+            </div>
+            <div class="controls">
+              <a class="with-modal" (click)="onShowDeleteModal(urlAction.id, index, 'url');">
+                <span class="fa fa-times"></span>
+              </a>
+            </div>
+            <a class="item-box edit" [routerLink]="['url', urlAction.id, 'edit']">
+              <h3>{{urlAction.name}}</h3>
+            </a>
+          </li>
+        </ng-template>
+        <li class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+          <a class="item-box add add-activity-url" [routerLink]="['url', 'new']">
+            <div>+</div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="items-section clearfix">
+      <h2>Custom actions</h2>
+      <ul class="items-list">
+        <ng-template ngFor let-customAction [ngForOf]="customActions" let-index="index">
+          <li class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+            <div class="controls left">
+              <label class="styled-checkbox styled-checkbox-fa">
+              <input type="checkbox" class="batch-delete-check" (change)="toggleAction(customAction.id, $event);"/>
+              <span class="fa fa-check"></span>
+            </label>
+            </div>
+            <div class="controls">
+              <a class="with-modal" (click)="onShowDeleteModal(customAction.id, index, 'custom');">
+                <span class="fa fa-times"></span>
+              </a>
+            </div>
+            <a class="item-box edit" [routerLink]="['custom', customAction.id, 'edit']">
+              <h3>{{customAction.name}}</h3>
+            </a>
+          </li>
+        </ng-template>
+        <li class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+          <a class="item-box add add-activity-url" [routerLink]="['custom', 'new']">
+            <div>+</div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="items-section clearfix">
+      <h2>Coupons</h2>
+      <ul class="items-list">
+        <ng-template ngFor let-coupon [ngForOf]="coupons" let-index="index">
+          <li class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+            <div class="controls left">
+              <label class="styled-checkbox styled-checkbox-fa">
+              <input type="checkbox" class="batch-delete-check"/>
+              <span class="fa fa-check"></span>
+            </label>
+            </div>
+            <div class="controls">
+              <a class="with-modal" (click)="onShowDeleteModal(coupon.id, index, 'coupon');">
+                <span class="fa fa-times"></span>
+              </a>
+            </div>
+            <a class="item-box edit" [routerLink]="['coupon', coupon.id, 'edit']">
+              <h3>{{coupon.name}}</h3>
+            </a>
+          </li>
+        </ng-template>
+        <li class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+          <a class="item-box add add-activity-url" [routerLink]="['coupon', 'new']">
+            <div>+</div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="items-section clearfix">
+      <h2>Request actions</h2>
+      <ul class="items-list">
+        <ng-template ngFor let-requestAction [ngForOf]="requestActions" let-index="index">
+          <li class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+            <div class="controls left">
+              <label class="styled-checkbox styled-checkbox-fa">
+              <input type="checkbox" class="batch-delete-check"/>
+              <span class="fa fa-check"></span>
+            </label>
+            </div>
+            <div class="controls">
+              <a class="with-modal" (click)="onShowDeleteModal(requestAction.id, index, 'request');">
+                <span class="fa fa-times"></span>
+              </a>
+            </div>
+            <a class="item-box edit" [routerLink]="['url', requestAction.id, 'edit']">
+              <h3>{{requestAction.name}}</h3>
+            </a>
+          </li>
+        </ng-template>
+        <li class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+          <a class="item-box add add-activity-url" [routerLink]="['url', 'new']">
+            <div>+</div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="stick-bottom batch-delete-bar" *ngIf="actionsSelected.length > 0;">
+      <input type="button" name="commit" value="Delete Actions" class="btn btn-danger batch-delete-btn pull-right">
+    </div>
+  </form>
+</div>

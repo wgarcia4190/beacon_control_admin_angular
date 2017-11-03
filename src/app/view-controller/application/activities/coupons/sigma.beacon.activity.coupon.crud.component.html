@@ -1,0 +1,341 @@
+<style>
+  .elements-select table tr td {
+    border: 1px solid #D5D5D5 !important;
+  }
+
+</style>
+
+<form class="simple_form edit_activity with-sticky-footer">
+  <div class="row form-container url-scheme">
+    <div class="col-md-6 first-column">
+      <h3>Essentials</h3>
+      <div class="fields">
+        <label class="required control-label" for="activity_trigger_attributes_type">Based on</label>
+        <div class="range-buttons row">
+          <sigma-beacon-square-radio-content #typeActions>
+            <sigma-beacon-square-radio [elementToShow]="'.field-triggered-BeaconTrigger'" [elementToHide]="'.field-triggered-ZoneTrigger'"
+              [name]="'activity_trigger_attributes_type'" [value]="'BeaconTrigger'" [active]="true" [radioName]="'Beacon'"></sigma-beacon-square-radio>
+            <sigma-beacon-square-radio [elementToShow]="'.field-triggered-ZoneTrigger'" [elementToHide]="'.field-triggered-BeaconTrigger'"
+              [name]="'activity_trigger_attributes_type'" [value]="'ZoneTrigger'" [active]="false" [radioName]="'Zone'"></sigma-beacon-square-radio>
+          </sigma-beacon-square-radio-content>
+        </div>
+        <label class="required control-label" for="activity_trigger_attributes_event_type">Trigger</label>
+        <div class="range-field-triggered field-triggered-BeaconTrigger">
+          <div class="range-buttons row">
+            <sigma-beacon-square-radio-content #beaconActions>
+              <sigma-beacon-square-radio [elementToHide]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'enter'" [active]="true" [radioName]="'On Hello'" [radioDescription]="'Trigger an action when a user appears in the beacon range.'"></sigma-beacon-square-radio>
+              <sigma-beacon-square-radio [elementToHide]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'leave'" [active]="false" [radioName]="'On Exit'" [radioDescription]="'Trigger an action when a user leaves the beacon range.'"></sigma-beacon-square-radio>
+              <sigma-beacon-square-radio [elementToHide]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'near'" [active]="false" [radioName]="'Nearby'" [radioDescription]="'Trigger an action when a user is in medium-to-close distance from the beacon. (20cm – 5m)'"></sigma-beacon-square-radio>
+              <sigma-beacon-square-radio [elementToHide]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'far'" [active]="false" [radioName]="'In Sight'" [radioDescription]="'Trigger an action when a user is distant from the beacon. (>5m)'"></sigma-beacon-square-radio>
+              <sigma-beacon-square-radio [elementToHide]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'immediate'" [active]="false" [radioName]="'Almost Touching'" [radioDescription]="'Trigger an action when a user\'s device is in direct proximity of the beacon. (<20cm)'"></sigma-beacon-square-radio>
+              <sigma-beacon-square-radio [elementToShow]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'dwell_time'" [active]="false" [radioName]="'DwellTime'" [radioDescription]="'Trigger an action after customisable amount of time after a user appears in the beacon range.'"></sigma-beacon-square-radio>
+            </sigma-beacon-square-radio-content>
+          </div>
+          <div class="form-group">
+            <div class="elements-select">
+              <div class="control-group">
+                <div class="controls">
+                  <div class="form-group select optional activity_trigger_add_beacon">
+                    <label class="select optional control-label" for="activity_trigger_attributes_add_beacon">Assign to a Beacon</label>
+                    <div class="input-group">
+                      <select #beaconSelector class="select optional form-control selectpicker dropup" data-live-search="true" data-live-search-placeholder="Search for a beacon">
+                          <ng-template ngFor let-beacon [ngForOf]="beacons">
+                              <option value="{{beacon.id}}">{{beacon.name}}</option>
+                            </ng-template>
+							</select>
+                      <span class="input-group-addon btn btn-success add-element btn btn-action-new" style="display: table-cell; padding: 0px;"
+                        (click)='addBeaconToActivity(beaconSelector.value)'>Add</span>
+                    </div>
+                    <span *ngIf="showErrorMessage" class="help-inline">can't be blank</span>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+
+              <table class="table table-bordered">
+                <tbody>
+                  <ng-template ngFor let-beacon [ngForOf]="selectedBeacons">
+                    <tr>
+                      <td class="col-xs-11" style="padding: 10px;">{{beacon.name}}</td>
+                      <td class="col-xs-1 active button-holder">
+                        <span class="btn btn-action-delete remove-element" (click)='removeBeaconFromActivity(beacon.id);'>Remove</span>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="range-field-triggered field-triggered-ZoneTrigger" style="display: none;">
+          <div class="range-buttons row">
+            <sigma-beacon-square-radio-content #zoneActions>
+              <sigma-beacon-square-radio [elementToHide]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'enter'" [active]="true" [radioName]="'On Hello'" [radioDescription]="'Trigger an action when a user appears in the zone range.'"></sigma-beacon-square-radio>
+              <sigma-beacon-square-radio [elementToHide]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'leave'" [active]="false" [radioName]="'On Exit'" [radioDescription]="'Trigger an action when a user leaves the zone range.'"></sigma-beacon-square-radio>
+              <sigma-beacon-square-radio [elementToShow]="'.field-triggered-dwell_time'" [name]="'activity_trigger_attributes_event_type'"
+                [value]="'dwell_time'" [active]="false" [radioName]="'DwellTime'" [radioDescription]="'Trigger an action after customisable amount of time after a user appears in the zone range.'"></sigma-beacon-square-radio>
+            </sigma-beacon-square-radio-content>
+          </div>
+          <div class="form-group">
+            <div class="elements-select">
+              <div class="control-group">
+                <div class="controls">
+                  <div class="form-group select optional activity_trigger_add_zone">
+                    <label class="select optional control-label">Assign to a Zone</label>
+                    <div class="input-group">
+                      <select #zoneSelector class="select optional form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search for a zone">
+                          <ng-template ngFor let-zone [ngForOf]="zones">
+                              <option value="{{zone.id}}">{{zone.name}}</option>
+                            </ng-template>
+								</select>
+                      <span class="input-group-addon btn btn-success add-element btn btn-action-new" style="display: table-cell; padding: 0px;"
+                        (click)="addZoneToActivity(zoneSelector.value);">Add</span>
+                    </div>
+                    <span *ngIf="showErrorMessage" class="help-inline">can't be blank</span>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+
+              <table class="table table-bordered">
+                <tbody>
+                  <ng-template ngFor let-zone [ngForOf]="selectedZones">
+                    <tr>
+                      <td [style.background-color]="zone.color" style="padding: 3px !important;"></td>
+                      <td class="col-xs-11" style="padding: 10px;">{{zone.name}}</td>
+                      <td class="col-xs-1 active button-holder">
+                        <span class="btn btn-action-delete remove-element" (click)='removeZoneFromActivity(zone.id);'>Remove</span>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group field-triggered field-triggered-dwell_time dwell-time-container" style="display: none;">
+          <div class="row">
+            <div class="col-xs-12">
+              <label class="optional control-label" for="activity_trigger_attributes_dwell_time">Dwell time</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 col-md-5 col-lg-4">
+              <input type="text" name="dwell_time_preview" id="dwell_time_preview" value="5 min" class="form-control" disabled />
+            </div>
+            <div class="col-sm-8 col-md-7 col-lg-8 dwell-time-slider-container">
+              <input type="text" class="span2 slider" value="" data-slider-min="5" data-slider-max="60" data-slider-step="1" data-slider-value="5"
+              />
+              <span class="pull-left" style="margin-left: -15px;">5 min</span>
+              <span class="pull-right" style="margin-right: -15px;">60 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Coupon</h3>
+      <div class="form-group optional activity_name">
+        <label class="optional control-label" for="activity_name">Action name</label>
+        <input class="required form-control activityName" type="text" value="" name="activity_name" id="activity_name" [formControl]="validForm.controls['activityName']"
+        />
+      </div>
+
+      <div class="coupon-fields">
+        <div class="fields">
+          <div class="form-group select optional activity_coupon_template">
+            <label class="select optional control-label">Template</label>
+            <select class="select optional form-control selectpicker" id="template_selector" (change)="changeTemplateType($event);">
+              <option value="template_1">Template with logo</option>
+              <option value="template_2">Template without logo</option>
+              <option value="template_3">Template with logo &amp; barcode</option>
+              <option value="template_4">Template without logo &amp; with barcode</option>
+              <option value="template_5">Template with button</option>
+            </select>
+          </div>
+
+          <div #qrContainer style="display: none;">
+            <div class="filtered-field">
+              <div class="form-group select optional activity_coupon_encoding_type">
+                <label class="select optional control-label" for="activity_coupon_attributes_encoding_type">Encoding type</label>
+                <select class="select optional form-control selectpicker" name="qrType" [(ngModel)]="qrType">
+                <option value="qr_code">Qr code</option>
+                <option value="code_128">Code 128</option>
+              </select>
+              </div>
+            </div>
+
+            <div class="filtered-field">
+              <div class="form-group string optional activity_coupon_unique_identifier_number">
+                <label class="string optional control-label" for="activity_coupon_attributes_unique_identifier_number">Unique identifier number</label>
+                <input class="string required couponUUID form-control" type="text" name="activity_coupon_attributes_unique_identifier_number"
+                  id="activity_coupon_attributes_unique_identifier_number" [formControl]="validForm.controls['couponUUID']"
+                />
+              </div>
+            </div>
+
+            <div class="filtered-field">
+              <div class="form-group string optional activity_coupon_identifier_number">
+                <label class="string optional control-label" for="activity_coupon_attributes_identifier_number">Identifier number</label>
+                <input class="string required form-control couponID" type="text" name="activity_coupon_attributes_identifier_number" id="activity_coupon_attributes_identifier_number"
+                  [formControl]="validForm.controls['couponID']" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group string optional activity_coupon_name">
+            <label class="string optional control-label" for="activity_coupon_attributes_name">Name</label>
+            <input class="string required form-control couponName" name="couponName" type="text" [(ngModel)]="couponName" [formControl]="validForm.controls['couponName']"
+            />
+          </div>
+
+          <div class="form-group string optional activity_coupon_title">
+            <label class="string optional control-label" for="activity_coupon_attributes_title">Title</label>
+            <input class="string required form-control couponTitle" name="couponTitle" type="text" [(ngModel)]="couponTitle" [formControl]="validForm.controls['couponTitle']"
+            />
+          </div>
+
+          <div class="form-group text optional activity_coupon_description">
+            <label class="text optional control-label" for="activity_coupon_attributes_description">Description</label>
+            <textarea class="text required form-control couponDesc" name="couponDesc" [(ngModel)]="couponDescription" [formControl]="validForm.controls['couponDesc']"></textarea>
+          </div>
+
+          <div #buttonContainer style="display: none;">
+            <div class="filtered-field" data-name="button_label">
+              <div class="form-group string optional activity_coupon_button_label">
+                <label class="string optional control-label" for="activity_coupon_attributes_button_label">Button label</label>
+                <input class="string required form-control buttonLabel" type="text" name="buttonLabel" [formControl]="validForm.controls['buttonLabel']"
+                  [(ngModel)]="buttonLabel">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group string optional activity_coupon_button_background_color">
+                  <label class="string optional control-label" for="activity_coupon_attributes_button_background_color">Button background</label>
+                  <div class="input-group pick-a-color-markup">
+                    <input class="string optional form-control pick-a-color" type="text" id="buttonBackground" name="buttonBackground" [(ngModel)]="buttonBackground"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="filtered-field">
+                  <div class="form-group string optional activity_coupon_button_font_color">
+                    <label class="string optional control-label" for="activity_coupon_attributes_button_font_color">Button text</label>
+                    <div class="input-group pick-a-color-markup">
+                      <input class="string optional form-control pick-a-color" type="text" id="buttonTextColor" name="buttonTextColor" [(ngModel)]="buttonTextColor"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="filtered-field">
+              <div class="form-group string optional activity_coupon_button_link">
+                <label class="optional control-label" for="activity_coupon_attributes_button_link">Button link</label>
+                <input class="string optional form-control" type="text" name="buttonLink" [formControl]="validForm.controls['buttonLink']"
+                  [(ngModel)]="buttonLink">
+              </div>
+            </div>
+          </div>
+
+          <div #logoContainer id="activity-logo" classs="filtered-field" style="display: block;">
+            <div class="fields">
+              <label class="file optional control-label" for="activity_coupon_attributes_logo_attributes_file">Logo</label>
+              <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                <div class="form-control" data-trigger="fileinput">
+                  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 50px; max-height: 35px; line-height: 40px;"></div>
+                  <span class="fileinput-filename" style="line-height: 40px;"></span>
+                </div>
+                <span class="btn btn-action-new  input-group-addon btn-file" style="display: table-cell;">
+                  <span class="fileinput-new">Add</span>
+                <span class="fileinput-exists">Change</span>
+                <input type="file" (change)="changeImage($event, 'logo');" class="btn btn-action-new" id="activity_coupon_attributes_logo_attributes_file"
+                  accept=".jpg, .png, .gif, .jpeg" />
+                </span>
+                <a class="input-table input-group-addon fileinput-exists btn-default btn btn-action-remove " data-dismiss="fileinput" (click)="removeImage('logo');">Remove</a>
+              </div>
+            </div>
+          </div>
+
+          <div id="activity-image" classs="filtered-field">
+            <div class="fields">
+              <label class="file optional control-label" for="activity_coupon_attributes_logo_attributes_file">Background Image</label>
+              <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                <div class="form-control" data-trigger="fileinput">
+                  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 50px; max-height: 35px; line-height: 40px;"></div>
+                  <span class="fileinput-filename" style="line-height: 40px;"></span>
+                </div>
+                <span class="btn btn-action-new  input-group-addon btn-file" style="display: table-cell;">
+                  <span class="fileinput-new">Add</span>
+                <span class="fileinput-exists">Change</span>
+                <input type="file" (change)="changeImage($event, 'background');" class="btn btn-action-new" id="activity_coupon_attributes_image_attributes_file"
+                  accept=".jpg, .png, .gif, .jpeg" />
+                </span>
+                <a class="input-table input-group-addon fileinput-exists btn-default btn btn-action-remove " data-dismiss="fileinput" (click)="removeImage('background');">Remove</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 second-column">
+      <div class="preview-wrapper">
+        <div class="preview-container visible-md-block visible-lg-block stick-80-top">
+          <div class="coupon-preview">
+            <div class="coupon" [ngClass]="{'with-barcode' : selectedTemplate === 'template_3' || selectedTemplate === 'template_4'}">
+              <div class="coupon-header" [ngStyle]="{'background': 'transparent url('+ couponImageBackground +') no-repeat center center'}">
+                <div class="header-title">
+                  <div class="coupon-logo" *ngIf="selectedTemplate === 'template_1' || selectedTemplate === 'template_3' || selectedTemplate === 'template_5'">
+                    <img src="{{couponLogo}}" />
+                  </div>
+                  <div class="coupon-title">
+                    <h3>{{couponName}}</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="coupon-content">
+                <h4>{{couponTitle}}</h4>
+                <p>{{couponDescription}}</p>
+              </div>
+              <div class="coupon-barcode" *ngIf="selectedTemplate === 'template_3' || selectedTemplate === 'template_4'">
+                <img src="./assets/resources/imgs/coupon/qr_code.png" class="coupon-barcode-image barcode-preview qr_code" *ngIf="qrType === 'qr_code'"
+                />
+                <img src="./assets/resources/imgs/coupon/code_128.png" class="coupon-barcode-image barcode-preview code_128" *ngIf="qrType === 'code_128'"
+                />
+                <div class="scan-code">Scan code to get discount</div>
+              </div>
+              <div class="coupon-button" *ngIf="selectedTemplate === 'template_5'">
+                <a class="button" [ngStyle]="{'background': buttonBackground, 'color': buttonTextColor}">{{buttonLabel}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row actions-row sticky-footer">
+    <div class="col-xs-12">
+      <div class="pull-right">
+        <a class="btn btn-primary btn-action-cancel btn-static-width" [routerLink]="['/app', 'applications', appId, appName, 'activities']">Cancel</a>
+        <input type="button" name="commit" value="Save action" class="btn btn btn-action-save btn-static-width" (click)="saveCouponActivity();">
+      </div>
+    </div>
+  </div>
+</form>
